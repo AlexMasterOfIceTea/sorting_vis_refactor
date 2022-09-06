@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, memo, useRef } from "react";
+import bubbleSort from "./algos/bubblesort";
+import { Footer } from "./components/Footer";
+import { TopBar } from "./components/TopBar";
+import { Visualizer } from "./components/Visualizer";
+import { AgloProvider } from "./contexts/algoContext";
+import { ControllerContext, ControllerProvider } from "./contexts/controllerContext";
+import { getBaseState, getRandomArray } from "./utils";
+
+const Content: FC = () => (
+	<div className="bg-slate-100 flex flex-col h-screen">
+		<TopBar />
+		<Visualizer />
+		<Footer />
+	</div>
+);
+const MemorizedContent = memo(Content);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<ControllerProvider>
+			<AgloProvider>
+				<MemorizedContent />
+			</AgloProvider>
+		</ControllerProvider>
+	);
 }
 
 export default App;
